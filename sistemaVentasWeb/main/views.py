@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 
@@ -8,7 +8,6 @@ def login_view(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        #return render(request,'registration/login.html')
         if user is not None:
             login(request,user)
             return render(request,'main/index.html')
@@ -22,3 +21,4 @@ def login_view(request):
         
 def logout_view(request):
     logout(request)
+    return redirect('registration/login.html')
