@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 # Create your views here.
 def login_view(request):
     if request.method == "POST":
@@ -21,4 +21,5 @@ def login_view(request):
         
 def logout_view(request):
     logout(request)
-    return redirect('registration/login.html')
+    messages.success(request,("Cerraste sesión!"))
+    return redirect('main:login_view')
