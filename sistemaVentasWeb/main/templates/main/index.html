@@ -1,9 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block title %}Dashboard{% endblock %}
-{% block header %}
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
 <body class="sb-nav-fixed">
@@ -23,7 +21,7 @@
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">Usuarios</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <a class="small text-white stretched-link" href="{% url 'usuarios:usurios_view' %}">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
