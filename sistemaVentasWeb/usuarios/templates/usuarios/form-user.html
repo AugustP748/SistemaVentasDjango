@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% block title %}Nuevo usuarios{% endblock %}
+{% block main %}
+<div style="padding:50px;">
+    <form method="POST" enctype="multipart/form-data">
+    
+        <!-- Security token -->
+        {% csrf_token %}
+    
+        <!-- Using the formset -->
+        {{ form.as_p }}
+        <a name="" id="" class="btn btn-danger" href="{% url 'usuarios:usurios_view' %}" role="button">
+            <i class="fa fa-arrow-left"></i> Volver</a>
+       
+        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+        <!--<input class="btn btn-success" type="submit" value="Guardar"> -->
+        
+    </form>
+</div>
+
+{% endblock %}

@@ -3,7 +3,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 # Create your views here.
-@login_required
+@login_required(login_url="/")
 def home(request):
     return render(request,'main/index.html')
 

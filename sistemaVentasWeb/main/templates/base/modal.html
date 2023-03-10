@@ -10,12 +10,12 @@
           {%block modalbody %}¿Desea cerrar sesión?{% endblock %}
         </div>
         <div class="modal-footer">
-            {% block modalbuttons %}
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-          <a href="{% url 'main:logout' %}">
-          <button type="button" class="btn btn-primary" >Cerrar Sesión</button>
-          </a>
-            {% endblock %}
+          {% block modalbuttons %}          
+            <a href="{% url 'main:logout' %}">
+            <button type="button" class="btn btn-primary" >Cerrar Sesión</button>
+            </a>
+          {% endblock %}
         </div>
       </div>
     </div>
