@@ -14,8 +14,8 @@ class usuarios_View(ListView):
 
 class create_user_view(CreateView):
     template_name='usuarios/form-user.html'
-    #form_class = UsuariosForm
-    fields = ['first_name','last_name','email','password','role']
+    form_class = UsuariosForm
+    #fields = ['first_name','last_name','email','password','role']
     model = User
     success_url=reverse_lazy('usuarios:usurios_view')
     
@@ -26,7 +26,8 @@ class create_user_view(CreateView):
     
 class update_user_view(UpdateView):
     template_name='usuarios/form-user.html'
-    fields = ['first_name','last_name','email','password','role']
+    form_class = UsuariosForm
+    #fields = ['first_name','last_name','email','password','role']
     model = User
     success_url=reverse_lazy('usuarios:usurios_view')
     

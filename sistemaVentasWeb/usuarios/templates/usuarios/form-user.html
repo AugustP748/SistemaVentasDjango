@@ -2,10 +2,10 @@
 {% block title %}Gestion usuarios{% endblock %}
 {% block main %}
 <div style="padding:50px;">
-    <form method="POST" enctype="multipart/form-data">
-        <!-- Security token -->
-        {% csrf_token %}
-        {% if gestion == 'trash' %}
+    {% if gestion == 'trash' %}
+        <form method='POST'>
+            <!-- Security token -->
+            {% csrf_token %}
             <h1>¿Deséa eliminar al usuario {{object.first_name}} {{object.last_name}}?</h1>
             <ul>
                 <li><strong>Nombre:</strong> {{object.first_name}}</li>
@@ -16,17 +16,39 @@
             <a name="" id="" class="btn btn-primary" href="{% url 'usuarios:usurios_view' %}" role="button">
                 <i class="fa fa-ban"></i> Cancelar</a>
             <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
-
-        {% else %}
-        <!-- Using the formset -->
-            {{ form.as_p }}
-            <a name="" id="" class="btn btn-danger" href="{% url 'usuarios:usurios_view' %}" role="button">
-                <i class="fa fa-arrow-left"></i> Volver</a>
-            <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
-            <!--<input class="btn btn-success" type="submit" value="Guardar"> -->
-        {% endif %}
-       
-    </form>
-</div>
+        </form>
+    {% else %}
+        <div class="container" style="text-align:center; width:50%; border:3px solid #184B88; border-radius: 20px">
+            <div class="form-group" style="padding:20px">
+                <form method="POST">
+                    <!-- Security token -->
+                    {% csrf_token %}
+                    <!-- Using the formset -->
+                    {% if gestion == 'new' %}
+                        <h1>Nuevo Usuario</h1>
+                    {% else %}
+                        <h1>Editar Usuario</h1>
+                    {% endif %}
+                    <div class="row" style="text-align:left;">
+                        <div class="col">
+                            {{ form.as_p }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a name="" id="" class="btn btn-danger" href="{% url 'usuarios:usurios_view' %}" 
+                            role="button"  style="width:100%">
+                                <i class="fa fa-arrow-left"></i> Volver</a>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-success" type="submit" style="width:100%">
+                                <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                        </div>
+                    </div>              
+                </form>
+            </div> <!-- FORM GROUP -->
+        </div> <!-- CONTAINER -->
+    {% endif %}
+</div> <!-- STYLE PADDING -->
 
 {% endblock %}
