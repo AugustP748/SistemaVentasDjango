@@ -1,20 +1,31 @@
 {% extends 'base/base.html' %}
-{% block title %}Nuevo usuarios{% endblock %}
+{% block title %}Gestion usuarios{% endblock %}
 {% block main %}
 <div style="padding:50px;">
     <form method="POST" enctype="multipart/form-data">
-    
         <!-- Security token -->
         {% csrf_token %}
-    
+        {% if gestion == 'trash' %}
+            <h1>¿Deséa eliminar al usuario {{object.first_name}} {{object.last_name}}?</h1>
+            <ul>
+                <li><strong>Nombre:</strong> {{object.first_name}}</li>
+                <li><strong>Apellido:</strong> {{object.last_name}}</li>
+                <li><strong>Email:</strong> {{object.email}}</li>
+                <li><strong>Rol:</strong> {{object.role}}</li>
+            </ul>
+            <a name="" id="" class="btn btn-primary" href="{% url 'usuarios:usurios_view' %}" role="button">
+                <i class="fa fa-ban"></i> Cancelar</a>
+            <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
+
+        {% else %}
         <!-- Using the formset -->
-        {{ form.as_p }}
-        <a name="" id="" class="btn btn-danger" href="{% url 'usuarios:usurios_view' %}" role="button">
-            <i class="fa fa-arrow-left"></i> Volver</a>
+            {{ form.as_p }}
+            <a name="" id="" class="btn btn-danger" href="{% url 'usuarios:usurios_view' %}" role="button">
+                <i class="fa fa-arrow-left"></i> Volver</a>
+            <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+            <!--<input class="btn btn-success" type="submit" value="Guardar"> -->
+        {% endif %}
        
-        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
-        <!--<input class="btn btn-success" type="submit" value="Guardar"> -->
-        
     </form>
 </div>
 

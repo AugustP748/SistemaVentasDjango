@@ -30,11 +30,7 @@
             </div>
             
             <div class="card-body">
-                <a name="" id="" class="btn btn-success" href="{% url 'usuarios:create_new_user' %}" role="button">
-                    <i class="fa fa-add"></i> Nuevo Usuario</a>
 
-                    <a name="" id="" class="btn btn-primary" href="{% url 'usuarios:usuarios_pdf' %}" role="button">
-                        <i class="fa fa-print"></i> Imprimir</a>
 
                 <table id="example" class="display compact" style="width:100%">
                     <thead>
@@ -50,6 +46,7 @@
                     <tbody>
                         {% if object_list %}
                             {% for us in object_list  %}
+                                {% if us.id != user.id %}
                         <tr>
                             <td>{{us.id}}</td>
                             <td>{{us.first_name}}</td>
@@ -59,10 +56,11 @@
                             <td>
                                 <a name="" id="" class="btn btn-warning" href="{% url 'usuarios:update_user' us.id %}" role="button">
                                     <i class="fa fa-edit"></i></a>
-                                <a name="" id="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteUser" href="#" role="button">
+                                <a name="" id="" class="btn btn-danger" href="{% url 'usuarios:delete_user' us.id %}" role="button">
                                     <i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
+                                {% endif %}
                             {% endfor %}
                         {% endif %}
                     </tbody>
@@ -72,6 +70,8 @@
         </div>
         <a name="" id="" class="btn btn-danger" href="{% url 'main:home' %}" role="button">
             <i class="fa fa-home"></i> Volver</a>
+        <a name="" id="" class="btn btn-success" href="{% url 'usuarios:create_new_user' %}" role="button">
+            <i class="fa fa-add"></i> Nuevo Usuario</a>
     </div>
 
 
@@ -86,7 +86,46 @@
                 dom: 'fBrtip',
                 lengthChange: false,
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                {
+                    extend: 'copy',
+                    text: '<i class="fa fa-copy"></i> Copiar',
+                    className: 'btn btn-default',
+                    exportOptions: {
+                       columns: 'th:not(:last-child)'
+                    }
+                }, 
+                    {
+                        extend: 'csv',
+                        text: '<i class="fa fa-file-csv"></i> CSV',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                           columns: 'th:not(:last-child)'
+                        }
+                    }, 
+                    {
+                        extend: 'excel',
+                        text: '<i class="fa fa-file-excel"></i> Excel',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                           columns: 'th:not(:last-child)'
+                        }
+                    }, 
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fa fa-file-pdf"></i> PDF',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                           columns: 'th:not(:last-child)'
+                        }
+                    }, 
+                    {
+                        extend: 'print',
+                        text: '<i class="fa fa-print"></i> Imprimir',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                           columns: 'th:not(:last-child)'
+                        }
+                    }
                 ]  
                         
             });
