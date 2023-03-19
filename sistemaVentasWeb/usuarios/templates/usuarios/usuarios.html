@@ -47,19 +47,19 @@
                         {% if object_list %}
                             {% for us in object_list  %}
                                 {% if us.id != user.id %}
-                        <tr>
-                            <td>{{us.id}}</td>
-                            <td>{{us.first_name}}</td>
-                            <td>{{us.last_name}}</td>
-                            <td>{{us.email}}</td>
-                            <td>{{us.role}}</td>
-                            <td>
-                                <a name="" id="" class="btn btn-warning" href="{% url 'usuarios:update_user' us.id %}" role="button">
-                                    <i class="fa fa-edit"></i></a>
-                                <a name="" id="" class="btn btn-danger" href="{% url 'usuarios:delete_user' us.id %}" role="button">
-                                    <i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
+                                    <tr>
+                                        <td>{{us.id}}</td>
+                                        <td>{{us.first_name}}</td>
+                                        <td>{{us.last_name}}</td>
+                                        <td>{{us.email}}</td>
+                                        <td>{{us.role}}</td>
+                                        <td>
+                                            <a name="" id="" class="btn btn-warning" href="{% url 'usuarios:update_user' us.id %}" role="button">
+                                                <i class="fa fa-edit"></i></a>
+                                            <a name="" id="" class="btn btn-danger" href="{% url 'usuarios:delete_user' us.id %}" role="button">
+                                                <i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
@@ -126,7 +126,12 @@
                            columns: 'th:not(:last-child)'
                         }
                     }
-                ]  
+                ],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+                    search: '<i class="fa fa-search"></i>',
+                    searchPlaceholder: "Buscar..."
+                }
                         
             });
             table.buttons().container()

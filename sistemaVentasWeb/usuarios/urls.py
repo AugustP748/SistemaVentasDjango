@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
 from .views import usuarios_View,create_user_view, update_user_view, delete_user_view
 from django.contrib.auth.decorators import login_required
 from . import views
