@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% block title %}Gestion Productos{% endblock %}
+{% block main %}
+<div style="padding:50px;">
+    {% if gestion == 'trash' %}
+        <form method='POST'>
+            <!-- Security token -->
+            {% csrf_token %}
+            <h1>¿Deséa eliminar el producto {{object.name}}?</h1>
+            <ul>
+                <li><strong>Código:</strong> {{object.code}}</li>
+                <li><strong>Nombre:</strong> {{object.name}}</li>
+                <li><strong>Descripción:</strong> {{object.description}}</li>
+                <li><strong>Stock:</strong> {{object.stock}}</li>
+                <li><strong>Precio:</strong> {{object.price}}</li>
+                <li><strong>Categoría:</strong> {{object.category_product}}</li>
+            </ul>
+            <a name="" id="" class="btn btn-primary" href="{% url 'productos:products_view' %}" role="button">
+                <i class="fa fa-ban"></i> Cancelar</a>
+            <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
+        </form>
+    {% else %}
+        <div class="container" style="text-align:center; width:50%; border:3px solid #184B88; border-radius: 20px">
+            <div class="form-group" style="padding:20px">
+                <form method="POST">
+                    <!-- Security token -->
+                    {% csrf_token %}
+                    <!-- Using the formset -->
+                    {% if gestion == 'new' %}
+                        <h1>Nuevo Producto</h1>
+                    {% else %}
+                        <h1>Editar Producto</h1>
+                    {% endif %}
+                    <div class="row" style="text-align:left;">
+                        <div class="col">
+                            {{ form.as_p }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a name="" id="" class="btn btn-danger" href="{% url 'productos:products_view' %}" 
+                            role="button"  style="width:100%">
+                                <i class="fa fa-arrow-left"></i> Volver</a>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-success" type="submit" style="width:100%">
+                                <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                        </div>
+                    </div>              
+                </form>
+            </div> <!-- FORM GROUP -->
+        </div> <!-- CONTAINER -->
+    {% endif %}
+</div> <!-- STYLE PADDING -->
+
+{% endblock %}
