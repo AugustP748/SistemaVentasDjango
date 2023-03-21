@@ -1,19 +1,5 @@
-{% extends 'base/base.html' %}
-{% load static %}
+{% extends 'base/tablebase.html' %}
 {% block title %}Productos{% endblock %}
-{% block header %}
-<!-- SCRIPTS OF DATATABLE -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/> -->
-
-
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-<!-- Buttons in DataTable-->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css">
-{% endblock %}
 
 {% block main %}
 
@@ -51,20 +37,29 @@
                                 <tr>
                                     <td>{{prod.code}}</td>
                                     <td>{{prod.name}}</td>
-                                    <td>{{prod.price}}</td>
-                                    <td>{{prod.stock}}</td>
+                                    <td>${{prod.price}}</td>
+                                    <td>
+                                        {% if prod.stock <= 3 %}
+                                        <span style="color:red;">{{prod.stock}}</span>
+                                        {% else %}
+                                            {{prod.stock}}
+                                        {% endif %}
+                                    </td>
                                     <td>{{prod.category_product}}</td>
                                     {%if prod.available %}
-                                        <td>ACTIVO</td>
+                                        <td><span style="color:green; font-weight: bold;">ACTIVO</span></td>
                                     {% else %}
-                                        <td>NO ACTIVO</td>
+                                        <td><span style="color:red; font-weight: bold;">NO ACTIVO</span></td>
                                     {% endif %}
                                     <td>
-                                        <a name="" id="" class="btn btn-info" href="#" role="button">
+                                        <a name="" id="" class="btn btn-info" href="{% url 'productos:detail_product' prod.code %}" 
+                                        role="button">
                                             <i class="fa fa-circle-info"></i></a>
-                                        <a name="" id="" class="btn btn-warning" href="#" role="button">
+                                        <a name="" id="" class="btn btn-warning" href="{% url 'productos:update_product' prod.code %}" 
+                                        role="button">
                                             <i class="fa fa-edit"></i></a>
-                                        <a name="" id="" class="btn btn-danger" href="#" role="button">
+                                        <a name="" id="" class="btn btn-danger" href="{% url 'productos:delete_product' prod.code %}" 
+                                        role="button">
                                             <i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -80,74 +75,12 @@
             <i class="fa fa-home"></i> Volver</a>
         <a name="" id="" class="btn btn-success" href="{% url 'productos:create_new_product' %}" role="button">
             <i class="fa fa-add"></i> Nuevo Producto</a>
+        <a name="" id="" class="btn btn-primary" href="{% url 'productos:create_new_product' %}" role="button">
+            <i class="fa fa-list"></i> Ver Categorías</a>
+        <a name="" id="" class="btn btn-dark" href="#" role="button">
+            <i class="fa fa-credit-card"></i> Comprar a proveedor</a>
     </div>
 
 
 {% endblock %}
 
-{% block scripts %}
-    <!-- DataTables JS -->
-    <script>
-        $(document).ready(function () {
-            var table = $('#example').DataTable({
-                //dom: '<"top"f>rt<"bottom"ilp><"clear">',
-                dom: 'fBrtip',
-                lengthChange: false,
-                buttons: [
-                {
-                    extend: 'copy',
-                    text: '<i class="fa fa-copy"></i> Copiar',
-                    className: 'btn btn-primary',
-                    exportOptions: {
-                       columns: 'th:not(:last-child)'
-                    }
-                }, 
-                    {
-                        extend: 'csv',
-                        text: '<i class="fa fa-file-csv"></i> CSV',
-                        className: 'btn btn-primary',
-                        exportOptions: {
-                           columns: 'th:not(:last-child)'
-                        }
-                    }, 
-                    {
-                        extend: 'excel',
-                        text: '<i class="fa fa-file-excel"></i> Excel',
-                        className: 'btn btn-primary',
-                        exportOptions: {
-                           columns: 'th:not(:last-child)'
-                        }
-                    }, 
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fa fa-file-pdf"></i> PDF',
-                        className: 'btn btn-primary',
-                        exportOptions: {
-                           columns: 'th:not(:last-child)'
-                        }
-                    }, 
-                    {
-                        extend: 'print',
-                        text: '<i class="fa fa-print"></i> Imprimir',
-                        className: 'btn btn-primary',
-                        exportOptions: {
-                           columns: 'th:not(:last-child)'
-                        }
-                    }
-                ],
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
-                    search: '<i class="fa fa-search"></i>',
-                    searchPlaceholder: "Buscar..."
-                }
-                        
-            });
-            table.buttons().container()
-            .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-            // $('#example tbody').on('click', 'tr', function () {
-            //    var data = table.row(this).data();
-            //    alert('You clicked on ' + data[0] + "'s row");
-            //});
-        });
-    </script>
-{% endblock %}

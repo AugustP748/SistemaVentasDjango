@@ -12,7 +12,7 @@
                 <li><strong>Nombre:</strong> {{object.name}}</li>
                 <li><strong>Descripción:</strong> {{object.description}}</li>
                 <li><strong>Stock:</strong> {{object.stock}}</li>
-                <li><strong>Precio:</strong> {{object.price}}</li>
+                <li><strong>Precio: </strong> ${{object.price}}</li>
                 <li><strong>Categoría:</strong> {{object.category_product}}</li>
             </ul>
             <a name="" id="" class="btn btn-primary" href="{% url 'productos:products_view' %}" role="button">
@@ -20,20 +20,58 @@
             <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
         </form>
     {% else %}
-        <div class="container" style="text-align:center; width:50%; border:3px solid #184B88; border-radius: 20px">
+        <div class="container" style="text-align:center; width:95%; border:3px solid #184B88; border-radius: 20px">
             <div class="form-group" style="padding:20px">
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <!-- Security token -->
                     {% csrf_token %}
                     <!-- Using the formset -->
-                    {% if gestion == 'new' %}
-                        <h1>Nuevo Producto</h1>
-                    {% else %}
-                        <h1>Editar Producto</h1>
-                    {% endif %}
+                    <div class="row" style="text-align:center;">
+                        <div class="col">
+                            {% if gestion == 'new' %}
+                                <h1>Nuevo Producto</h1>
+                            {% elif gestion == 'edit' %}
+                                <h1>Editar Producto</h1>
+                            {% else %}
+                                <h1>{{ object.name }}</h1>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
                     <div class="row" style="text-align:left;">
                         <div class="col">
-                            {{ form.as_p }}
+                            {% if gestion == 'detail' %}
+                                <div class="row">
+                                    <div class="col">
+                                        <img src="{{ object.image.url }}" class="img-thumbnail">
+                                    </div>
+                                    <div class="col">
+                                        <p><strong>Código:</strong> {{ object.code }}</p>
+                                        <p><strong>Descripción:</strong> {{ object.description }}</p>
+                                        <p><strong>Stock:</strong> 
+                                            {% if object.stock <= 3 %}
+                                                <span style="color:red;">{{ object.stock }}</span>
+                                            {% else %}
+                                                {{ object.stock }}
+                                            {% endif %}
+                                        </p>
+                                        <p><strong>Precio:</strong> ${{ object.price }}</p>
+                                        <p><strong>Estado:</strong> 
+                                            {% if object.available %}
+                                                <span style="color:green; font-weight: bold;">ACTIVO</span>
+                                            {% else %}
+                                                <span style="color:red; font-weight: bold;">NO ACTIVO</span>
+                                            {% endif %}
+                                        </p>
+                                        <p><strong>Categoría:</strong> ${{ object.category_product }}</p>
+                                        <p><strong>Creado:</strong> {{ object.created|date }}</p>
+                                        <p><strong>Actualizado:</strong> {{ object.updated|date }}</p>
+                                    </div>
+                                </div>
+                                
+                            {% else %}
+                                {{ form.as_p }}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="row">
@@ -42,10 +80,18 @@
                             role="button"  style="width:100%">
                                 <i class="fa fa-arrow-left"></i> Volver</a>
                         </div>
-                        <div class="col">
-                            <button class="btn btn-success" type="submit" style="width:100%">
-                                <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
-                        </div>
+                        {% if gestion == 'detail' %}
+                            <div class="col">
+                                <a href="#">
+                                <button class="btn btn-warning" type="button" style="width:100%">
+                                    <i class="fa fa-edit"></i>Editar</button> </a>
+                            </div>
+                        {% else %}
+                            <div class="col">
+                                <button class="btn btn-success" type="submit" style="width:100%">
+                                    <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                            </div>
+                        {% endif %}
                     </div>              
                 </form>
             </div> <!-- FORM GROUP -->

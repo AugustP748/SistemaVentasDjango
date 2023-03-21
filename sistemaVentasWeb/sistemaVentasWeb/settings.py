@@ -135,3 +135,8 @@ AUTH_USER_MODEL = 'main.User'
 # Root for media info
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+
+# This is to show the image (see urls from products)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+    )
