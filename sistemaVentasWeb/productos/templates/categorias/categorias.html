@@ -1,0 +1,70 @@
+{% extends 'base/tablebase.html' %}
+{% block title %}Categorías{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Categorías</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Listado de Categorías
+            </div>
+            
+            <div class="card-body">
+
+
+                <table id="example" class="display compact" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name_category</th>
+                            <th>created</th>
+                            <th>updated</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if object_list %}
+                            {% for categ in object_list  %}
+                               
+                                <tr>
+                                    <td>{{categ.id}}</td>
+                                    <td>{{categ.name_category}}</td>
+                                    <td>{{categ.created}}</td>
+                                    <td>{{categ.updated}}</td>
+                                    <td>
+                                        <a name="" id="" class="btn btn-info" href="#" 
+                                        role="button">
+                                            <i class="fa fa-circle-info"></i></a>
+                                        <a name="" id="" class="btn btn-warning" href="#" 
+                                        role="button">
+                                            <i class="fa fa-edit"></i></a>
+                                        <a name="" id="" class="btn btn-danger" href="#" 
+                                        role="button">
+                                            <i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                               
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <a name="" id="" class="btn btn-danger" href="{% url 'productos:products_view' %}" role="button">
+            <i class="fa fa-arrow-left"></i> Volver</a>
+        <a name="" id="" class="btn btn-success" href="#" role="button">
+            <i class="fa fa-add"></i> Nueva Categoría</a>
+        <a name="" id="" class="btn btn-dark" href="#" role="button">
+            <i class="fa fa-money-check"></i> Ver Proveedores</a>
+    </div>
+
+
+{% endblock %}
+

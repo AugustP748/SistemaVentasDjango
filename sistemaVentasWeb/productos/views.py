@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
-from .models import Product
+from .models import Product, category
 from .forms import ProductosForm
 from django.urls import reverse_lazy
 
@@ -49,3 +49,7 @@ class detail_product_view(DetailView):
         context = super().get_context_data(**kwargs)
         context['gestion'] = 'detail'
         return context
+
+class Categories_view(ListView):
+    template_name='categorias/categorias.html'
+    model = category
