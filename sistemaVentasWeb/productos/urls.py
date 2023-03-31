@@ -16,5 +16,9 @@ urlpatterns = [
     path('delete-producto/<int:pk>/',login_required(delete_product_view.as_view(),login_url="/"),name="delete_product"),
     path('detail-producto/<int:pk>/',login_required(detail_product_view.as_view(),login_url="/"),name="detail_product"),
     path('categorias/',login_required(Categories_view.as_view(),login_url="/"),name="categories_view"),
+    path('nueva-categoria/',login_required(create_category_view.as_view(),login_url="/"),name="create_new_category"),
+    path('update-categoria/<int:pk>/',login_required(update_category_view.as_view(),login_url="/"),name="update_category"),
+    path('delete-categoria/<int:pk>/',login_required(delete_category_view.as_view(),login_url="/"),name="delete_category"),
+    path('detail-producto/<int:pk>/',login_required(views.detail_category_view,login_url="/"),name="detail_category"),
     
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

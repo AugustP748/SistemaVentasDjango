@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, category
 
 class ProductosForm(forms.ModelForm):
     
@@ -18,4 +18,14 @@ class ProductosForm(forms.ModelForm):
             'price':forms.NumberInput(attrs={'class':'form-control','placeholder':'precio'}) ,
             'category_product':forms.Select(attrs={'class':'form-control'}),
             'available':forms.CheckboxInput(attrs={'class':'form-check-input','type':'checkbox'}) 
+        }
+        
+class CategoryForm(forms.ModelForm):
+    
+    class Meta:
+        model = category        
+        fields = ('name_category',)     
+        labels = {'name_category':'Categoría'}
+        widgets = {
+            'name_category': forms.TextInput(attrs={'class':'form-control','placeholder':'Nombre Categoría'})  
         }

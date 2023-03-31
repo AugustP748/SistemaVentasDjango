@@ -4,7 +4,7 @@ from django.db import models
 class category(models.Model):
     name_category = models.CharField(max_length=50)
     created=models.DateTimeField(auto_now_add=True)
-    updated=models.DateTimeField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name="Category"
@@ -24,7 +24,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     category_product = models.ForeignKey(category,on_delete=models.CASCADE)
     created=models.DateTimeField(auto_now_add=True)
-    updated=models.DateTimeField(auto_now_add=True)
+    updated=models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name="Product"
