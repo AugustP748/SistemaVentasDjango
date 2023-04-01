@@ -38,13 +38,13 @@
                                     <td>{{categ.created}}</td>
                                     <td>{{categ.updated}}</td>
                                     <td>
-                                        <a name="" id="" class="btn btn-info" href="#" 
+                                        <a name="" id="" class="btn btn-info" href="{% url 'categorias:detail_category' categ.id %}" 
                                         role="button">
                                             <i class="fa fa-circle-info"></i></a>
-                                        <a name="" id="" class="btn btn-warning" href="{% url 'productos:update_category' categ.id %}" 
+                                        <a name="" id="" class="btn btn-warning" href="{% url 'categorias:update_category' categ.id %}" 
                                         role="button">
                                             <i class="fa fa-edit"></i></a>
-                                        <a name="" id="" class="btn btn-danger" href="{% url 'productos:delete_category' categ.id %}" 
+                                        <a name="" id="" class="btn btn-danger" href="{% url 'categorias:delete_category' categ.id %}" 
                                         role="button">
                                             <i class="fa fa-trash"></i></a>
                                     </td>
@@ -59,7 +59,7 @@
         </div>
         <a name="" id="" class="btn btn-danger" href="{% url 'productos:products_view' %}" role="button">
             <i class="fa fa-arrow-left"></i> Volver</a>
-        <a name="" id="" class="btn btn-success" href="{% url 'productos:create_new_category' %}" role="button">
+        <a name="" id="" class="btn btn-success" href="{% url 'categorias:create_new_category' %}" role="button">
             <i class="fa fa-add"></i> Nueva Categoría</a>
         <a name="" id="" class="btn btn-dark" href="#" role="button">
             <i class="fa fa-money-check"></i> Ver Proveedores</a>

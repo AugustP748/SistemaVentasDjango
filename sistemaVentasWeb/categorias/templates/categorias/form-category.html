@@ -11,7 +11,7 @@
                 <li><strong>Ultima Actualización:</strong> {{object.updated}}</li>
                 <li><strong>Fecha de creación:</strong> {{object.created}}</li>
             </ul>
-            <a name="" id="" class="btn btn-primary" href="{% url 'productos:categories_view' %}" role="button">
+            <a name="" id="" class="btn btn-primary" href="{% url 'categorias:categories_view' %}" role="button">
                 <i class="fa fa-ban"></i> Cancelar</a>
             <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
         </form>
@@ -24,17 +24,30 @@
                     <!-- Using the formset -->
                     {% if gestion == 'new' %}
                         <h1>Nueva Categoría</h1>
-                    {% else %}
+                    {% elif getion == 'edit' %}
                         <h1>Editar Categoría</h1>
+                    {% else %}
+                        <h1>{{ object.name_category }}</h1>
                     {% endif %}
                     <div class="row" style="text-align:left;">
                         <div class="col">
-                            {{ form.as_p }}
+                            {% if gestion == 'detail' %}
+                                <div class="row">
+                                    <div class="col">
+                                        <ul>
+                                            
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {{ form.as_p }}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <a name="" id="" class="btn btn-danger" href="{% url 'productos:categories_view' %}" 
+                            <a name="" id="" class="btn btn-danger" href="{% url 'categorias:categories_view' %}" 
                             role="button"  style="width:100%">
                                 <i class="fa fa-arrow-left"></i> Volver</a>
                         </div>
