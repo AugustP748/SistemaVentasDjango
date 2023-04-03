@@ -16,7 +16,7 @@
             <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
         </form>
     {% else %}
-        <div class="container" style="text-align:center; width:50%; border:3px solid #184B88; border-radius: 20px">
+        <div class="container containerFormBorder">
             <div class="form-group" style="padding:20px">
                 <form method="POST">
                     <!-- Security token -->
@@ -27,7 +27,7 @@
                     {% elif getion == 'edit' %}
                         <h1>Editar Categoría</h1>
                     {% else %}
-                        <h1>{{ object.name_category }}</h1>
+                        <h1>{{ categ.name_category }}</h1>
                     {% endif %}
                     <div class="row" style="text-align:left;">
                         <div class="col">
@@ -35,11 +35,55 @@
                                 <div class="row">
                                     <div class="col">
                                         <ul>
+                                            <li><p><strong>Creado:</strong> {{ categ.created|date }}</p></li>
+                                             
+                                            <li><p><strong>Actualizado:</strong> {{ categ.updated|date }}</p></li>
                                             
+                                            <li><p><strong>Cantidad Productos:</strong> {{ listado_productos|length }}</p></li>
 
                                         </ul>
-                                    </div>
-                                </div>
+                                    </div> <!-- Cierre col 1 -->
+                                </div> <!-- Cierre row 1 -->
+
+                                {% if listado_productos %}
+
+                                <div class="row">
+                                    <div class="col">
+                                        <h2>Productos</h2>
+                                    </div ><!-- Cierre col 1 -->
+                                </div> <!-- Cierre row 2 -->
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">IMAGEN</th>
+                                                        <th scope="col">CODIGO</th>
+                                                        <th scope="col">PRODUCTO</th>
+                                                        <th scope="col">ACCIONES</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="text-align: left; vertical-align: middle;">
+                                                    {% for producto in listado_productos %}
+                                                    <tr class="">
+                                                        <td style="width: 10%;"><img src="{{ producto.image.url }}" class="card-img-top table-img-products" alt="..."></td>
+                                                        <td>{{producto.code}}</td>
+                                                        <td>{{producto.name}}</td>
+                                                        <td>
+                                                            <a name="" id="" class="btn btn-info" href="#" 
+                                                            role="button"><i class="fa fa-circle-info"></i> Detalles</a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div> <!-- Cierre de table-responsive -->
+                                    </div>  <!-- Cierre col 1 -->
+                                </div> <!-- Cierre row 3 -->
+                                {% endif %}
+
                             {% else %}
                                 {{ form.as_p }}
                             {% endif %}

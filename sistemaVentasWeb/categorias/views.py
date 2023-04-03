@@ -43,11 +43,13 @@ class delete_category_view(DeleteView):
         context['gestion'] = 'trash'
         return context
     
-def detail_category_view(request,id_category):
+def detail_category_view(request,id):
+    context = {}
     listado_productos = Product.objects.filter(category_product=id)
-    category_name = get_object_or_404(category, pk=id_category)
-    quantity_products = category_name.producto_set.count()
-    return render(request,'categorias:detail_category',
-                  {'pk':id,'listado_productos':listado_productos,
-                   'quantity_products':quantity_products,
-                   'gestion': 'detail'})
+    categ = category.objects.filter(pk=id).first()
+    context['gestion'] = 'detail'
+    context['categ'] = categ
+    context['listado_productos'] = listado_productos
+    #category_name = get_object_or_404(category, pk=id)
+    #quantity_products = category_name.producto_set.count()
+    return render(request,'categorias/form-category.html',context=context)

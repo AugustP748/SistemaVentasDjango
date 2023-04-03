@@ -1,0 +1,36 @@
+
+.containerFormBorder{
+    text-align:center; 
+    width:95%; 
+    border:3px solid #184B88; 
+    border-radius: 20px
+}
+
+.table-img-products{
+  width:100%;
+  height:auto;
+}
+
+.card img {
+    width: 75%;
+    height: auto; /* Elige el tamaño que quieras */
+    object-fit: cover; /* Ajusta la imagen al tamaño del contenedor sin deformarla */
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* o center o space-around, dependiendo de la alineación que desees */
+  }
+  
+  .card {
+    width: 30%; /* o cualquier otro ancho que desees */
+    margin-bottom: 20px; /* o cualquier otro margen que desees */
+  }
+  
+
+  
+/*  .card-custom {
+    width: 300px;
+    height: auto;
+  }*/

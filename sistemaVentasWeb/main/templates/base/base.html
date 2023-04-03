@@ -1,7 +1,9 @@
 {# In this html template is the base for all the views of the web app except login view #}
 {% extends 'base/subbase.html' %}
 {% load static %}
-
+{% block header %}
+    <link href="{% static 'css/design.css' %}" rel="stylesheet" />
+{% endblock %}
 {% block content %}
 <body class="sb-nav-fixed">
     {% include 'base/navbar.html' %}

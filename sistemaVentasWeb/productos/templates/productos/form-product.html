@@ -41,7 +41,8 @@
             
         </form>
     {% else %}
-        <div class="container" style="text-align:center; width:95%; border:3px solid #184B88; border-radius: 20px">
+        <!-- <div class="container" style="text-align:center; width:95%; border:3px solid #184B88; border-radius: 20px"> -->
+        <div class="container containerFormBorder">
             <div class="form-group" style="padding:20px">
                 <form method="POST" enctype="multipart/form-data">
                     <!-- Security token -->
@@ -88,7 +89,7 @@
                                                 <span style="color:red; font-weight: bold;">NO ACTIVO</span>
                                             {% endif %}
                                         </p>
-                                        <p><strong>Categoría:</strong> ${{ object.category_product }}</p>
+                                        <p><strong>Categoría:</strong> {{ object.category_product }}</p>
                                         <p><strong>Creado:</strong> {{ object.created|date }}</p>
                                         <p><strong>Actualizado:</strong> {{ object.updated|date }}</p>
                                     </div>
