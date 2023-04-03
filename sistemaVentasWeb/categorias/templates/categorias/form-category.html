@@ -11,7 +11,7 @@
                 <li><strong>Ultima Actualización:</strong> {{object.updated}}</li>
                 <li><strong>Fecha de creación:</strong> {{object.created}}</li>
             </ul>
-            <a name="" id="" class="btn btn-primary" href="{% url 'categorias:categories_view' %}" role="button">
+            <a name="" id="" class="btn btn-primary" href="javascript: history.go(-1)" role="button">
                 <i class="fa fa-ban"></i> Cancelar</a>
             <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
         </form>
@@ -35,9 +35,9 @@
                                 <div class="row">
                                     <div class="col">
                                         <ul>
-                                            <li><p><strong>Creado:</strong> {{ categ.created|date }}</p></li>
+                                            <li><p><strong>Creado:</strong> {{ categ.created|date:"d/m/Y H:i:s" }}</p></li>
                                              
-                                            <li><p><strong>Actualizado:</strong> {{ categ.updated|date }}</p></li>
+                                            <li><p><strong>Actualizado:</strong> {{ categ.updated|date:"d/m/Y H:i:s" }}</p></li>
                                             
                                             <li><p><strong>Cantidad Productos:</strong> {{ listado_productos|length }}</p></li>
 
@@ -72,7 +72,7 @@
                                                         <td>{{producto.code}}</td>
                                                         <td>{{producto.name}}</td>
                                                         <td>
-                                                            <a name="" id="" class="btn btn-info" href="#" 
+                                                            <a name="" id="" class="btn btn-info" href="{% url 'productos:detail_product' producto.code %}" 
                                                             role="button"><i class="fa fa-circle-info"></i> Detalles</a>
                                                         </td>
                                                     </tr>
@@ -91,14 +91,17 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <a name="" id="" class="btn btn-danger" href="{% url 'categorias:categories_view' %}" 
+                            <a name="" id="" class="btn btn-danger" href="javascript: history.go(-1)" 
                             role="button"  style="width:100%">
                                 <i class="fa fa-arrow-left"></i> Volver</a>
                         </div>
                         <div class="col">
-                            <button class="btn btn-success" type="submit" style="width:100%">
-                                <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                            {% if gestion != 'detail'%}
+                                <button class="btn btn-success" type="submit" style="width:100%">
+                                    <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                            {% endif %}
                         </div>
+                        
                     </div>              
                 </form>
             </div> <!-- FORM GROUP -->

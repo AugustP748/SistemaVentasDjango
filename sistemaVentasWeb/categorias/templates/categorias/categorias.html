@@ -35,8 +35,8 @@
                                 <tr>
                                     <td>{{categ.id}}</td>
                                     <td>{{categ.name_category}}</td>
-                                    <td>{{categ.created}}</td>
-                                    <td>{{categ.updated}}</td>
+                                    <td>{{categ.created|date:"d/m/Y H:i:s"}}</td>
+                                    <td>{{categ.updated|date:"d/m/Y H:i:s"}}</td>
                                     <td>
                                         <a name="" id="" class="btn btn-info" href="{% url 'categorias:detail_category' categ.id %}" 
                                         role="button">
@@ -57,7 +57,7 @@
             </div>
             
         </div>
-        <a name="" id="" class="btn btn-danger" href="{% url 'productos:products_view' %}" role="button">
+        <a name="" id="" class="btn btn-danger" href="javascript: history.go(-1)" role="button">
             <i class="fa fa-arrow-left"></i> Volver</a>
         <a name="" id="" class="btn btn-success" href="{% url 'categorias:create_new_category' %}" role="button">
             <i class="fa fa-add"></i> Nueva Categoría</a>

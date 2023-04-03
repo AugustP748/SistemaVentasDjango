@@ -11,6 +11,12 @@
   height:auto;
 }
 
+.detail-img-product{
+  width:50%;
+  height:auto;
+}
+
+
 .card img {
     width: 75%;
     height: auto; /* Elige el tamaño que quieras */
