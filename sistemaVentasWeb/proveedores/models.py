@@ -1,5 +1,6 @@
 from django.db import models
 from categorias.models import category
+from direcciones.models import Address
 
 # Create your models here.
 class Provider(models.Model):
@@ -8,10 +9,11 @@ class Provider(models.Model):
     phone = models.CharField(max_length=15)
     categories = models.ManyToManyField(category)
     description = models.TextField()
+    address = models.ManyToManyField(Address)
+    state = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    #adress = models.ManyToManyField(Adress)
     
     class Meta:
         verbose_name = 'Provider'
-        verbose_name_plural = 'Prodiders'
+        verbose_name_plural = 'Providers'

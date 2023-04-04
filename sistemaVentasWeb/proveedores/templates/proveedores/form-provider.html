@@ -1,0 +1,127 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Gestion Proveedores{% endblock %}
+{% block main %}
+<div style="padding:50px;">
+    {% if gestion == 'trash' %}
+        <form method='POST'>
+            <!-- Security token -->
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <h1>¿Deséa eliminar al Proveedor {{object.name}}?</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul>
+                        <li><strong>Razón Social:</strong> {{object.name}}</li>
+                        <li><strong>Email:</strong> {{object.email}}</li>
+                        <li><strong>Phone: </strong> ${{object.phone}}</li>
+                        <li><strong>Descripción:</strong> {{object.description}}</li>
+                        <li><strong>Categorías:</strong> {{object.categories}}</li>
+                        <li><strong>Direcciones:</strong> {{object.address}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a name="" id="" class="btn btn-primary" href="javascript: history.go(-1)"
+                     role="button" style="width:100%">
+                        <i class="fa fa-ban"></i> Cancelar</a>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" type="submit" style="width:100%"><i class="fa-solid fa-trash">
+                    </i> Eliminar</button>
+                </div>
+            </div>
+            
+        </form>
+    {% else %}
+        <!-- <div class="container" style="text-align:center; width:95%; border:3px solid #184B88; border-radius: 20px"> -->
+        <div class="container containerFormBorder">
+            <div class="form-group" style="padding:20px">
+                <form method="POST" enctype="multipart/form-data">
+                    <!-- Security token -->
+                    {% csrf_token %}
+                    <!-- Using the formset -->
+                    <div class="row" style="text-align:center;">
+                        <div class="col">
+                            {% if gestion == 'new' %}
+                                <h1>Nuevo Proveedor</h1>
+                            {% elif gestion == 'edit' %}
+                                <h1>Editar Proveedor</h1>
+                            {% else %}
+                                <h1>{{ object.name }}</h1>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="text-align:left;">
+                        <div class="col">
+                            {% if gestion == 'detail' %}
+                                <div class="row">
+                                    <div class="col">
+                                        {% if object.image.url %}
+                                            <img src="{{ object.image.url }}" class="img-thumbnail">
+                                        {% else %}
+                                             <img src="{% static 'images/default.jpg' %}" class="img-thumbnail">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        <p><strong>Código:</strong> {{ object.code }}</p>
+                                        <p><strong>Descripción:</strong> {{ object.description }}</p>
+                                        <p><strong>Stock:</strong> 
+                                            {% if object.stock <= 3 %}
+                                                <span style="color:red;">{{ object.stock }}</span>
+                                            {% else %}
+                                                {{ object.stock }}
+                                            {% endif %}
+                                        </p>
+                                        <p><strong>Precio:</strong> ${{ object.price }}</p>
+                                        <p><strong>Estado:</strong> 
+                                            {% if object.available %}
+                                                <span style="color:green; font-weight: bold;">ACTIVO</span>
+                                            {% else %}
+                                                <span style="color:red; font-weight: bold;">NO ACTIVO</span>
+                                            {% endif %}
+                                        </p>
+                                        <p><strong>Categoría:</strong> {{ object.category_product }}</p>
+                                        <p><strong>Creado:</strong> {{ object.created|date:"d/m/Y H:i:s" }}</p>
+                                        <p><strong>Actualizado:</strong> {{ object.updated|date:"d/m/Y H:i:s" }}</p>
+                                    </div>
+                                </div>
+                                
+                            {% else %}
+                                {{ form.as_p }}
+                                {{ form.address.as_p}}
+                                {{ form.categories.as_p}}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a name="" id="" class="btn btn-danger" href="javascript: history.go(-1)" 
+                            role="button"  style="width:100%">
+                                <i class="fa fa-arrow-left"></i> Volver</a>
+                        </div>
+                        {% if gestion == 'detail' %}
+                            <div class="col">
+                                <a name="" id="" class="btn btn-warning" href="#" 
+                                role="button"  style="width:100%">
+                                    <i class="fa fa-edit"></i>Editar</a>
+                            </div>
+                        {% else %}
+                            <div class="col">
+                                <button class="btn btn-success" type="submit" style="width:100%">
+                                    <i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                            </div>
+                        {% endif %}
+                    </div>              
+                </form>
+            </div> <!-- FORM GROUP -->
+        </div> <!-- CONTAINER -->
+    {% endif %}
+</div> <!-- STYLE PADDING -->
+
+{% endblock %}

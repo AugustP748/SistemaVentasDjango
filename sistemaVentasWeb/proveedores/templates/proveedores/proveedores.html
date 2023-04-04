@@ -1,0 +1,78 @@
+{% extends 'base/tablebase.html' %}
+{% block title %}Proveedores{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Proveedores</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Listado de Proveedores
+            </div>
+            
+            <div class="card-body">
+
+
+                <table id="example" class="display compact" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Raz. Soc.</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if object_list %}
+                            {% for prov in object_list  %}
+                               
+                                <tr>
+                                    <td>{{prov.id}}</td>
+                                    <td>{{prov.name}}</td>
+                                    <td>${{prov.email}}</td>
+                                    <td>${{prov.phone}}</td>
+                                    {% if prov.state %}
+                                        <td><span style="color:green; font-weight: bold;">ACTIVO</span></td>
+                                    {% else %}
+                                        <td><span style="color:red; font-weight: bold;">NO ACTIVO</span></td>
+                                    {% endif %}
+                                    <td>
+                                        <a name="" id="" class="btn btn-info" href="#" 
+                                        role="button">
+                                            <i class="fa fa-circle-info"></i></a>
+                                        <a name="" id="" class="btn btn-warning" href="#" 
+                                        role="button">
+                                            <i class="fa fa-edit"></i></a>
+                                        <a name="" id="" class="btn btn-danger" href="#" 
+                                        role="button">
+                                            <i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                               
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <a name="" id="" class="btn btn-danger" href="javascript: history.go(-1)" role="button">
+            <i class="fa fa-home"></i> Volver</a>
+        <a name="" id="" class="btn btn-success" href="{% url 'proveedores:create_new_provider' %}" role="button">
+            <i class="fa fa-add"></i> Nuevo Proveedor</a>
+        <a name="" id="" class="btn btn-primary" href="{% url 'categorias:categories_view' %}" role="button">
+            <i class="fa fa-list"></i> Ver Categorías</a>
+        <a name="" id="" class="btn btn-dark" href="#" role="button">
+            <i class="fa fa-credit-card"></i> Comprar a proveedor</a>
+    </div>
+
+
+{% endblock %}
+
